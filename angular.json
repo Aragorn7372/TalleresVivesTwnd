@@ -16,7 +16,10 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "outputPath": "dist/TalleresVivesTwnd",
             "browser": "src/main.ts",
+            "index": "src/index.html",
+            "baseHref": "/TalleresVivesTwnd/",
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
