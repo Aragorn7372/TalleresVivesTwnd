@@ -1,0 +1,348 @@
+<div class="min-h-screen bg-base-300">
+  <!-- Header -->
+  <header class="bg-black">
+    <div class="container mx-auto py-6 text-center">
+      <h1 class="text-4xl font-bold text-white">Taller Vives</h1>
+    </div>
+  </header>
+
+  <div class="container mx-auto px-4 py-8">
+    <form [formGroup]="facturaForm" (ngSubmit)="onSubmit()" class="space-y-6">
+
+      <!-- Sección Superior: Imagen + Datos del Cliente -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+        <!-- Imagen -->
+        <div class="flex justify-center items-start">
+          <div class="w-full max-w-lg">
+            <img
+              src="TheIndustrialist.jpg"
+              alt="Logotipo del taller"
+              class="rounded-lg shadow-2xl w-full">
+          </div>
+        </div>
+
+        <!-- Datos del Cliente -->
+        <div class="card bg-black shadow-2xl">
+          <div class="card-body">
+            <h2 class="card-title text-2xl mb-6 text-center">Datos del Cliente</h2>
+
+            <!-- Número de factura -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text">Número de factura: *</span>
+              </label>
+              <input
+                type="text"
+                formControlName="numero"
+                placeholder="Número de factura"
+                class="input input-bordered"
+                [class.input-error]="facturaForm.get('numero')?.invalid && facturaForm.get('numero')?.touched">
+              <label class="label" *ngIf="facturaForm.get('numero')?.invalid && facturaForm.get('numero')?.touched">
+                <span class="label-text-alt text-error">Introduce un número de factura válido (1-7 caracteres)</span>
+              </label>
+            </div>
+
+            <!-- Nombre completo -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text">Nombre completo: *</span>
+              </label>
+              <input
+                type="text"
+                formControlName="nombre"
+                placeholder="Nombre completo"
+                class="input input-bordered"
+                [class.input-error]="facturaForm.get('nombre')?.invalid && facturaForm.get('nombre')?.touched">
+              <label class="label" *ngIf="facturaForm.get('nombre')?.invalid && facturaForm.get('nombre')?.touched">
+                <span class="label-text-alt text-error">Introduce un nombre válido (2-200 caracteres)</span>
+              </label>
+            </div>
+
+            <!-- Fecha -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text">Fecha de envío: *</span>
+              </label>
+              <input
+                type="text"
+                formControlName="fecha"
+                placeholder="DD/MM/YYYY"
+                class="input input-bordered"
+                [class.input-error]="facturaForm.get('fecha')?.invalid && facturaForm.get('fecha')?.touched">
+              <label class="label" *ngIf="facturaForm.get('fecha')?.invalid && facturaForm.get('fecha')?.touched">
+                <span class="label-text-alt text-error">Formato: DD/MM/YYYY, no puede ser posterior a hoy</span>
+              </label>
+            </div>
+
+            <!-- CP y Provincia -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text">CP: *</span>
+                </label>
+                <input
+                  type="text"
+                  formControlName="cp"
+                  placeholder="Código postal"
+                  maxlength="5"
+                  class="input input-bordered"
+                  [class.input-error]="facturaForm.get('cp')?.invalid && facturaForm.get('cp')?.touched">
+                <label class="label" *ngIf="facturaForm.get('cp')?.invalid && facturaForm.get('cp')?.touched">
+                  <span class="label-text-alt text-error">CP inválido (5 dígitos)</span>
+                </label>
+              </div>
+
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text">Provincia:</span>
+                </label>
+                <input
+                  type="text"
+                  formControlName="provincia"
+                  placeholder="Provincia"
+                  class="input input-bordered bg-base-300">
+              </div>
+            </div>
+
+            <!-- Localidad -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text">Localidad: *</span>
+              </label>
+              <input
+                type="text"
+                formControlName="localidad"
+                placeholder="Localidad"
+                class="input input-bordered"
+                [class.input-error]="facturaForm.get('localidad')?.invalid && facturaForm.get('localidad')?.touched">
+              <label class="label" *ngIf="facturaForm.get('localidad')?.invalid && facturaForm.get('localidad')?.touched">
+                <span class="label-text-alt text-error">Introduce una localidad válida (2-20 caracteres)</span>
+              </label>
+            </div>
+
+            <!-- Documento -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text">Documento (DNI/NIE/CIF): *</span>
+              </label>
+              <input
+                type="text"
+                formControlName="documento"
+                placeholder="DNI/NIE/CIF"
+                class="input input-bordered"
+                [class.input-error]="facturaForm.get('documento')?.invalid && facturaForm.get('documento')?.touched">
+              <label class="label" *ngIf="facturaForm.get('documento')?.invalid && facturaForm.get('documento')?.touched">
+                <span class="label-text-alt text-error">Documento inválido</span>
+              </label>
+            </div>
+
+            <!-- Teléfono -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text">Teléfono: *</span>
+              </label>
+              <input
+                type="tel"
+                formControlName="telefono"
+                placeholder="Teléfono (empieza por 6, 7 o 9)"
+                class="input input-bordered"
+                [class.input-error]="facturaForm.get('telefono')?.invalid && facturaForm.get('telefono')?.touched">
+              <label class="label" *ngIf="facturaForm.get('telefono')?.invalid && facturaForm.get('telefono')?.touched">
+                <span class="label-text-alt text-error">Teléfono inválido (9 dígitos, empieza por 6, 7 o 9)</span>
+              </label>
+            </div>
+
+            <!-- Email -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text">Email: *</span>
+              </label>
+              <input
+                type="email"
+                formControlName="email"
+                placeholder="email@ejemplo.com"
+                class="input input-bordered"
+                [class.input-error]="facturaForm.get('email')?.invalid && facturaForm.get('email')?.touched">
+              <label class="label" *ngIf="facturaForm.get('email')?.invalid && facturaForm.get('email')?.touched">
+                <span class="label-text-alt text-error">Email inválido</span>
+              </label>
+            </div>
+
+            <!-- Captcha -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text">Captcha: *</span>
+              </label>
+              <div class="mb-2 font-bold text-info text-lg">
+                ¿Cuánto es {{ num1 }} + {{ num2 }}?
+              </div>
+              <input
+                type="number"
+                formControlName="captcha"
+                placeholder="Respuesta"
+                class="input input-bordered"
+                [class.input-error]="facturaForm.get('captcha')?.touched && !validarCaptcha()">
+              <label class="label" *ngIf="facturaForm.get('captcha')?.touched && !validarCaptcha()">
+                <span class="label-text-alt text-error">Respuesta incorrecta</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Sección de Factura -->
+      <div class="card bg-black shadow-2xl">
+        <div class="card-body">
+          <h2 class="card-title text-2xl mb-6 text-center">Líneas de Factura</h2>
+
+          <div class="flex justify-end mb-4">
+            <button
+              type="button"
+              (click)="agregarLinea()"
+              class="btn btn-primary btn-sm">
+              ➕ Añadir línea
+            </button>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="table table-zebra">
+              <thead>
+              <tr>
+                <th>Cantidad</th>
+                <th>Descripción</th>
+                <th>Precio (€)</th>
+                <th>IVA %</th>
+                <th>IVA (€)</th>
+                <th>Importe (€)</th>
+                <th>Total (€)</th>
+                <th>Acción</th>
+              </tr>
+              </thead>
+              <tbody>
+              <app-linea-factura
+                *ngFor="let linea of lineas; trackBy: trackByIndex"
+                [linea]="linea"
+                (eliminar)="eliminarLinea($event)">
+              </app-linea-factura>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Totales por IVA -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+            <div>
+              <h3 class="font-bold text-lg mb-4">Base Imponible</h3>
+              <div class="space-y-2">
+                <div class="form-control">
+                  <label class="label">
+                    <span class="label-text">Base IVA 21%</span>
+                  </label>
+                  <input
+                    type="text"
+                    [value]="totales.base21.toFixed(2)"
+                    class="input input-bordered text-right bg-base-300"
+                    readonly>
+                </div>
+                <div class="form-control">
+                  <label class="label">
+                    <span class="label-text">Base IVA 10%</span>
+                  </label>
+                  <input
+                    type="text"
+                    [value]="totales.base10.toFixed(2)"
+                    class="input input-bordered text-right bg-base-300"
+                    readonly>
+                </div>
+                <div class="form-control">
+                  <label class="label">
+                    <span class="label-text">Base IVA 4%</span>
+                  </label>
+                  <input
+                    type="text"
+                    [value]="totales.base4.toFixed(2)"
+                    class="input input-bordered text-right bg-base-300"
+                    readonly>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="font-bold text-lg mb-4">Total IVA</h3>
+              <div class="space-y-2">
+                <div class="form-control">
+                  <label class="label">
+                    <span class="label-text">IVA 21%</span>
+                  </label>
+                  <input
+                    type="text"
+                    [value]="totales.iva21.toFixed(2)"
+                    class="input input-bordered text-right bg-base-300"
+                    readonly>
+                </div>
+                <div class="form-control">
+                  <label class="label">
+                    <span class="label-text">IVA 10%</span>
+                  </label>
+                  <input
+                    type="text"
+                    [value]="totales.iva10.toFixed(2)"
+                    class="input input-bordered text-right bg-base-300"
+                    readonly>
+                </div>
+                <div class="form-control">
+                  <label class="label">
+                    <span class="label-text">IVA 4%</span>
+                  </label>
+                  <input
+                    type="text"
+                    [value]="totales.iva4.toFixed(2)"
+                    class="input input-bordered text-right bg-base-300"
+                    readonly>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Total final -->
+          <div class="mt-6">
+            <div class="form-control max-w-md ml-auto">
+              <label class="label">
+                <span class="label-text font-bold text-xl">TOTAL FACTURA (€)</span>
+              </label>
+              <input
+                type="text"
+                [value]="totales.total.toFixed(2)"
+                class="input input-bordered input-lg text-right font-bold text-2xl bg-success text-success-content"
+                readonly>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botón enviar -->
+      <div class="flex justify-center py-6">
+        <button type="submit" class="btn btn-success btn-lg px-12">
+          📨 Enviar Factura
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Modales -->
+  <app-modal-resumen
+    [isOpen]="mostrarModalResumen"
+    [datosCliente]="datosCliente"
+    [lineas]="lineas"
+    [totales]="totales"
+    (cerrar)="cerrarModalResumen()">
+  </app-modal-resumen>
+
+  <app-modal-errores
+    [isOpen]="mostrarModalErrores"
+    [errores]="erroresValidacion"
+    (cerrar)="cerrarModalErrores()">
+  </app-modal-errores>
+</div>

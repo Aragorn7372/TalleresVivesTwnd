@@ -1,12 +1,12 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { FacturaForm } from './components/factura-form/factura-form';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.css'
+  standalone: true,
+  imports: [FacturaForm],
+  template: `<app-factura-form></app-factura-form>`
 })
 export class App {
-  protected readonly title = signal('TalleresVivesTwnd');
+  title = 'talleres-vives-angular';
 }
